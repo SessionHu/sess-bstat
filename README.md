@@ -14,6 +14,11 @@
   ```sh
   curl 'https://github.com/SessionHu/sess-bstat/raw/refs/heads/main/sb.sh' --output sb.sh'
   ```
+- 设置环境变量 `SESS_BSTAT_COOKIE` 为你的 B 站 Cookie
+  ```sh
+  # 请从浏览器中获取到你的实际 SESSDATA
+  export SESS_BSTAT_COOKIE='SESSDATA=xxxxxx'
+  ```
 
 - 运行 `sb.sh` 查看数据 (任选)
   ```sh
