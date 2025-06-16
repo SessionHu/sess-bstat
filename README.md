@@ -12,7 +12,7 @@
 
 - 从仓库或 Releases 处下载最新版本的 `sb.sh`
   ```sh
-  curl 'https://github.com/SessionHu/sess-bstat/raw/refs/heads/main/sb.sh' --output sb.sh'
+  curl 'https://github.com/SessionHu/sess-bstat/raw/refs/heads/main/sb.sh' --output sb.sh
   ```
 - 设置环境变量 `SESS_BSTAT_COOKIE` 为你的 B 站 Cookie
   ```sh
@@ -37,6 +37,8 @@
 ## 支持
 
 - 欢迎在 Issues 提供关于本项目的建议与问题报告
+
+- 本项目离不开 [bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect) 社区的共同努力
 
 ## 许可
 
