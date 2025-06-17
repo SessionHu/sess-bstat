@@ -36,10 +36,18 @@ print_level
 
 print_fans() {
   printf '\e[2K粉丝: '
-  curl -G 'https://api.bilibili.com/x/relation/stat' \
+  printf $(curl -G 'https://api.bilibili.com/x/relation/stat' \
     --url-query "vmid=$MID" \
     -A "$UA" -b "$COOKIE" \
-    -s | jq .data.follower
+    -s | jq .data.follower)
+  new_fans_cnt=$(curl -G 'https://api.bilibili.com/x/relation/followers/Unread/detail' \
+    -A "$UA" -b "$COOKIE" \
+    -s | jq .data.new_fans_cnt)
+  if [[ "$new_fans_cnt" != "0" ]]; then
+    echo " (+${new_fans_cnt})"
+  else
+    echo ''
+  fi
 }
 print_fans
 
