@@ -13,6 +13,11 @@ NAV=$(curl -G 'https://api.bilibili.com/x/web-interface/nav' \
   -A "$UA" -b "$COOKIE" \
   -s | jq .data)
 
+if [[ $(echo $NAV | jq .isLogin) == 'false' ]]; then
+  echo '未登录! 请检查环境变量 SESS_BSTAT_COOKIE!'
+  exit -1
+fi
+
 MID=$(echo $NAV | jq .mid -r)
 
 # =========== 基本 ============
