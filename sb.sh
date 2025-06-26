@@ -18,7 +18,7 @@ if [[ $(echo $NAV | jq .isLogin) == 'false' ]]; then
   exit -1
 fi
 
-MID=$(echo $NAV | jq .mid -r)
+# MID=$(echo $NAV | jq .mid -r)
 
 # =========== 基本 ============
 
@@ -32,26 +32,27 @@ printf '\e[2K硬币: '
 echo $NAV | jq .money
 
 print_level() {
+  printf '等级: '
   level=$(echo $NAV | jq .level_info.current_level)
   cur_exp=$(echo $NAV | jq .level_info.current_exp)
-  nxt_exp=$(echo $NAV | jq .level_info.next_exp -r)
-  echo -e "\e[2K等级: $level ($cur_exp/$nxt_exp)"
+  if [[ $level != '6' ]]; then
+    nxt_exp="/$(echo $NAV | jq .level_info.next_exp -r)"
+  fi
+  echo -e "\e[K$level (${cur_exp}${nxt_exp})"
 }
 print_level
 
 print_fans() {
-  printf '\e[2K粉丝: '
-  printf $(curl -G 'https://api.bilibili.com/x/relation/stat' \
-    --url-query "vmid=$MID" \
+  printf '粉丝: '
+  fans=$(curl -G 'https://api.bilibili.com/x/relation/followers/Unread/detail' \
     -A "$UA" -b "$COOKIE" \
-    -s | jq .data.follower)
-  new_fans_cnt=$(curl -G 'https://api.bilibili.com/x/relation/followers/Unread/detail' \
-    -A "$UA" -b "$COOKIE" \
-    -s | jq .data.new_fans_cnt)
+    -s | jq .data)
+  total=$(echo $fans | jq .total)
+  new_fans_cnt=$(echo $fans | jq .new_fans_cnt)
   if [[ "$new_fans_cnt" != "0" ]]; then
-    echo " (+${new_fans_cnt})"
+    echo -e "\e[K$total (+${new_fans_cnt})"
   else
-    echo ''
+    echo -e "\e[K$total"
   fi
 }
 print_fans
@@ -107,3 +108,5 @@ echo $UNREAD | jq .sys_msg
 
 printf '\e[2K助手: '
 echo $UNREAD | jq .up
+
+printf '\e[J'
