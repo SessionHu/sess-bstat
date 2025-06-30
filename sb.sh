@@ -33,8 +33,8 @@ echo $NAV | jq .money
 
 print_level() {
   printf '等级: '
-  level=$(echo $NAV | jq .level_info.current_level)
-  cur_exp=$(echo $NAV | jq .level_info.current_exp)
+  local level=$(echo $NAV | jq .level_info.current_level)
+  local cur_exp=$(echo $NAV | jq .level_info.current_exp)
   if [[ $level != '6' ]]; then
     nxt_exp="/$(echo $NAV | jq .level_info.next_exp -r)"
   fi
@@ -44,11 +44,11 @@ print_level
 
 print_fans() {
   printf '粉丝: '
-  fans=$(curl -G 'https://api.bilibili.com/x/relation/followers/Unread/detail' \
+  local fans=$(curl -G 'https://api.bilibili.com/x/relation/followers/Unread/detail' \
     -A "$UA" -b "$COOKIE" \
     -s | jq .data)
-  total=$(echo $fans | jq .total)
-  new_fans_cnt=$(echo $fans | jq .new_fans_cnt)
+  local total=$(echo $fans | jq .total)
+  local new_fans_cnt=$(echo $fans | jq .new_fans_cnt)
   if [[ "$new_fans_cnt" != "0" ]]; then
     echo -e "\e[K$total (+${new_fans_cnt})"
   else
