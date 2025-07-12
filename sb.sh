@@ -22,7 +22,13 @@ fi
 
 # =========== 基本 ============
 
-echo -e '\e[H\e[3J\e[2K==== SESS BSTAT ==='
+if [[ $TERM == 'xterm-256color' ]]; then
+  printf '\e[H\e[3J\e[2K'
+else
+  printf '\e[H\e[2K'
+fi
+
+echo '==== SESS BSTAT ==='
 echo -e '\e[2K---- 基本 ---------'
 
 printf '\e[2K用户: '
