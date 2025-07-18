@@ -12,7 +12,8 @@
 
 - 从仓库或 Releases 处下载最新版本的 `sb.sh`
   ```sh
-  curl 'https://github.com/SessionHu/sess-bstat/raw/refs/heads/main/sb.sh' --output sb.sh
+  curl -L 'https://github.com/SessionHu/sess-bstat/raw/main/sb.sh' --output sb.sh
+  chmod +x sb.sh
   ```
 - 设置环境变量 `SESS_BSTAT_COOKIE` 为你的 B 站 Cookie
   ```sh
