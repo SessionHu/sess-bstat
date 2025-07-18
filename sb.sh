@@ -69,7 +69,7 @@ echo -e '\e[2K---- UP 主 --------'
 
 LAST_VIDEO=$(curl -G 'https://member.bilibili.com/x2/creative/web/archives/sp?pn=1&ps=1' \
   -A "$UA" -b "$COOKIE" \
-  -s | jq .data.arc_audits.[0])
+  -s | jq '.data.arc_audits[0]')
 
 printf '\e[2K标题: '
 echo $LAST_VIDEO | jq -r .Archive.title
