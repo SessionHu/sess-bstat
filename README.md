@@ -38,6 +38,8 @@
 
 - 欢迎在 Issues 提供关于本项目的建议与问题报告
 
+- 欢迎前往 [QQ 交流群](https://www.bilibili.com/opus/1063318818878652433) 获取社区支持
+
 - 本项目离不开 [bilibili-API-collect](https://github.com/SocialSisterYi/bilibili-API-collect) 社区的共同努力
 
 ## 许可
